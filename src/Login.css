@@ -1,0 +1,257 @@
+.picture-background {
+  background-image: url('./pictures/瀑布变“冰瀑”.png');
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  height: 100vh;
+  /* 设置高度，确保背景图片覆盖整个屏幕 */
+}
+
+.meetingpd {
+  font-family: "Squada One";
+  position: fixed;
+  left: 40px;
+  top: 16px;
+  width: 141px;
+  height: 40px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  font-size: 32px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}
+
+.rectangle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  left: 88px;
+  top: 320px;
+  width: 360px;
+  height: 80px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  transition: left 0.3s ease;
+  z-index: 999999;
+}
+
+.rectangle:hover {
+  left: 70px;
+  cursor: pointer;
+}
+
+.plus {
+  margin-bottom: 12px;
+  margin-left: 30px;
+  opacity: 1;
+  font-size: 50px;
+  font-weight: 500;
+  color: rgba(37, 37, 37, 1);
+}
+
+.add {
+  margin-bottom: 3px;
+  margin-left: 20px;
+  opacity: 1;
+  font-size: 25px;
+  font-weight: 500;
+  color: rgba(37, 37, 37, 1);
+
+}
+
+.balck-square {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: fixed;
+  left: 88px;
+  top: 430px;
+  width: 315px;
+  height: 70px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  padding: 24px 24px 24px 24px;
+}
+
+.text-square {
+  left: 24px;
+  top: 24px;
+  width: 257px;
+  height: 76px;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 24px;
+  color: rgba(240, 197, 79, 1);
+  text-align: left;
+  vertical-align: top;
+}
+
+/* 界面文字提示部分 */
+.text-bottom {
+  position: fixed;
+  right: 30px;
+  bottom: 10px;
+  width: 698px;
+  height: 18px;
+  opacity: 1;
+  text-shadow: 0px 0px 2px rgba(68, 68, 68, 1);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* 登陆页右上角白色方框 */
+.rectangle-right {
+  position: fixed;
+  right: 25px;
+  top: 24px;
+  width: 209px;
+  height: 40px;
+  opacity: 1;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.13);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 12px 0px 12px;
+}
+
+.rectangle-right:hover {
+  cursor: pointer;
+}
+
+.language-change {
+  position: fixed;
+  size: 30px;
+  right: 200px;
+  top: 24px;
+  opacity: 1;
+}
+
+.console {
+  position: fixed;
+  top: 23px;
+  right: 140px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 40px;
+  color: rgba(37, 37, 37, 1);
+}
+
+.registration {
+  position: fixed;
+  top: 23px;
+  right: 60px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 40px;
+  color: rgba(37, 37, 37, 1);
+}
+
+.drawer {
+  margin-left: 80px;
+  margin-top: 100px;
+  width: 400px;
+  height: 426px;
+  opacity: 1;
+  border-radius: 8px;
+  border: 1px solid rgba(225, 225, 225, 1);
+}
+
+.text1-drawer {
+  margin-top: 80px;
+  margin-left: 100px;
+  width: 198px;
+  height: 60px;
+  font-size: 40px;
+  font-weight: 600;
+  color: rgba(37, 37, 37, 1);
+}
+
+.text2-drawer {
+  margin-top: 0px;
+  margin-left: 110px;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(161, 161, 161, 1);
+}
+
+.text3-drawer {
+  margin-top: 70px;
+  margin-left: 80px;
+  width: 241px;
+  height: 36px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: rgba(161, 161, 161, 1);
+  text-align: center;
+}
+
+.Input {
+  width: 280px;
+  height: 58px;
+  margin-top: 30px;
+  margin-left: 50px;
+  border-radius: 8px;
+}
+
+.Input:focus {
+  color: rgba(161, 161, 161, 1);
+}
+
+.text-number {
+  position: fixed;
+  margin-top: 48px;
+  margin-left: 140px;
+  z-index: 9999;
+  width: 64px;
+  height: 24px;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(161, 161, 161, 1);
+  /* 禁用元素上的鼠标事件 */
+  pointer-events: none;
+}
+
+.text-focus {
+  transform: translate(-60px, -25px);
+  font-size: 12px;
+  transition: 0.5s;
+  z-index: 9999;
+  padding: 0 0px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  color: rgba(240, 197, 79, 1);
+
+}
+
+.text-none{
+  transform: translate(0px, 0px);
+  transition: 0.5s;
+  font-size: 16px;
+}
+
+.Button {
+  margin-top: 30px;
+  margin-left: 254px;
+  color: white;
+  background-color: black;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 58.5%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 99;
+}
