@@ -6,6 +6,7 @@
   /* 设置高度，确保背景图片覆盖整个屏幕 */
 }
 
+/* meetingpad字样 */
 .meetingpd {
   font-family: "Squada One";
   position: fixed;
@@ -19,6 +20,7 @@
   color: rgba(255, 255, 255, 1);
 }
 
+/* 左边最大框 */
 .rectangle {
   display: flex;
   justify-content: flex-start;
@@ -35,11 +37,13 @@
   z-index: 999999;
 }
 
+/* 左移动 */
 .rectangle:hover {
   left: 70px;
   cursor: pointer;
 }
 
+/* 加号按钮 */
 .plus {
   margin-bottom: 12px;
   margin-left: 30px;
@@ -49,6 +53,7 @@
   color: rgba(37, 37, 37, 1);
 }
 
+/* 添加文件 */
 .add {
   margin-bottom: 3px;
   margin-left: 20px;
@@ -59,6 +64,7 @@
 
 }
 
+/* 黑色背景色 */
 .balck-square {
   display: flex;
   justify-content: flex-start;
@@ -74,6 +80,7 @@
   padding: 24px 24px 24px 24px;
 }
 
+/* 提示文字 */
 .text-square {
   left: 24px;
   top: 24px;
@@ -90,7 +97,7 @@
   vertical-align: top;
 }
 
-/* 界面文字提示部分 */
+/* 界面右下脚文字提示部分 */
 .text-bottom {
   position: fixed;
   right: 30px;
@@ -121,10 +128,12 @@
   padding: 0px 12px 0px 12px;
 }
 
+/* 变为手的动画效果 */
 .rectangle-right:hover {
   cursor: pointer;
 }
 
+/* 中英文切换 */
 .language-change {
   position: fixed;
   size: 30px;
@@ -133,6 +142,7 @@
   opacity: 1;
 }
 
+/* 控制台 */
 .console {
   position: fixed;
   top: 23px;
@@ -143,6 +153,7 @@
   color: rgba(37, 37, 37, 1);
 }
 
+/* 注册 */
 .registration {
   position: fixed;
   top: 23px;
@@ -153,6 +164,7 @@
   color: rgba(37, 37, 37, 1);
 }
 
+/* 抽屉 */
 .drawer {
   margin-left: 80px;
   margin-top: 100px;
@@ -163,6 +175,7 @@
   border: 1px solid rgba(225, 225, 225, 1);
 }
 
+/* 抽屉内的文字 */
 .text1-drawer {
   margin-top: 80px;
   margin-left: 100px;
@@ -173,6 +186,7 @@
   color: rgba(37, 37, 37, 1);
 }
 
+/* 中间小字 */
 .text2-drawer {
   margin-top: 0px;
   margin-left: 110px;
@@ -181,8 +195,10 @@
   color: rgba(161, 161, 161, 1);
 }
 
+/* 抽屉内下方文字 */
 .text3-drawer {
-  margin-top: 70px;
+  position: fixed;
+  margin-top: 130px;
   margin-left: 80px;
   width: 241px;
   height: 36px;
@@ -193,18 +209,22 @@
   text-align: center;
 }
 
+/* 输入框 */
 .Input {
   width: 280px;
   height: 58px;
   margin-top: 30px;
   margin-left: 50px;
   border-radius: 8px;
+  /* border-color: #F0C54F; */
 }
 
+/* 输入框聚焦颜色 */
 .Input:focus {
   color: rgba(161, 161, 161, 1);
 }
 
+/* 默认字样颜色 */
 .text-number {
   position: fixed;
   margin-top: 48px;
@@ -218,8 +238,15 @@
   color: rgba(161, 161, 161, 1);
   /* 禁用元素上的鼠标事件 */
   pointer-events: none;
+
+  /* 校验错误后文字内容变红 */
+  &.text-error {
+    color: red;
+    /* 设置文字错误状态时的颜色 */
+  }
 }
 
+/* 移动动画 */
 .text-focus {
   transform: translate(-60px, -25px);
   font-size: 12px;
@@ -230,22 +257,25 @@
   display: flex;
   justify-content: center;
   color: rgba(240, 197, 79, 1);
-
 }
 
-.text-none{
+/* 位置还原动画 */
+.text-none {
   transform: translate(0px, 0px);
   transition: 0.5s;
   font-size: 16px;
 }
 
+/* 按钮 */
 .Button {
-  margin-top: 30px;
+  position: fixed;
+  margin-top: 20px;
   margin-left: 254px;
   color: white;
   background-color: black;
 }
 
+/* 左侧蒙层样式 */
 .background {
   position: fixed;
   top: 0;
@@ -254,4 +284,20 @@
   height: 100%;
   background: rgba(0, 0, 0, 0);
   z-index: 99;
+}
+
+.error-text {
+  position: fixed;
+  color: red;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.Input.input-error {
+  border-color: red;
+  /* 设置错误状态时的边框颜色 */
+}
+
+.input-blur {
+  border-color: #F0C54F;
 }
