@@ -5,10 +5,16 @@
   height: 100vh;
   /* 设置高度，确保背景图片覆盖整个屏幕 */
 }
+/* 
+@font-face {
+  font-family: "Squada One";
+  src:
+    url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap“)
 
+)} */
 /* meetingpad字样 */
 .meetingpd {
-  font-family: "Squada One";
+  font-family: Squada One;
   position: fixed;
   left: 40px;
   top: 16px;
@@ -219,10 +225,10 @@
   /* border-color: #F0C54F; */
 }
 
-/* 输入框聚焦颜色 */
+/* 输入框聚焦颜色
 .Input:focus {
   color: rgba(161, 161, 161, 1);
-}
+} */
 
 /* 默认字样颜色 */
 .text-number {
@@ -276,7 +282,7 @@
 }
 
 /* 左侧蒙层样式 */
-.background {
+/* .background {
   position: fixed;
   top: 0;
   left: 0;
@@ -284,7 +290,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0);
   z-index: 99;
-}
+} */
 
 .error-text {
   position: fixed;
@@ -300,4 +306,170 @@
 
 .input-blur {
   border-color: #F0C54F;
+}
+
+.file-box {
+  position: fixed;
+  left: 88px;
+  top: calc(50% - 40px);
+  width: 260px;
+  height: 0;
+  opacity: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.25);
+  padding: 20px 20px 20px 20px;
+  overflow: hidden;
+  animation: expandUp 0.5s forwards;
+}
+
+@keyframes expandUp {
+  0% {
+    height: 80px;
+    top: calc(50% - 40px);
+  }
+
+  100% {
+    height: 430px;
+    opacity: 1;
+    top: calc(50% - 215px);
+  }
+}
+
+@keyframes return {
+  0% {
+    height: 430px;
+    opacity: 1;
+    top: calc(50% - 215px);
+  }
+
+  100% {
+    height: 80px;
+    top: calc(50% - 40px);
+    opacity: 0;
+  }
+}
+
+/* 使用伪类选择器来创建上半部分的灰色背景 */
+.file-box::before {
+  content: '';
+  position: absolute;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background-color: #f2f2f2;
+  /* 确保伪类元素在内容之后显示 */
+  z-index: -1;
+}
+
+.file-item {
+  margin-top: 5px;
+  margin-left: -10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 260px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.file-name {
+  font-size: 12px;
+  color: rgba(37, 37, 37, 1);
+  font-weight: bold;
+}
+
+.file-size {
+  margin-top: 5px;
+  font-size: 10px;
+  color: rgba(161, 161, 161, 1);
+}
+
+.close-x {
+  margin-left: 125px;
+  margin-top: -18px;
+  color: rgba(161, 161, 161, 1);
+}
+
+/* 文件展示列表里的样式 */
+.text-transfer {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.total-size {
+  position: fixed;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(161, 161, 161, 1);
+  margin-left: 10px;
+}
+
+.text-round {
+  position: fixed;
+
+  margin-top: -24px;
+  margin-left: 160px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(240, 197, 79, 1);
+  cursor: pointer;
+}
+
+.text-add {
+  margin-left: 10px;
+  width: 16px;
+  height: 16px;
+  font-size: 20px;
+  color: #252525;
+  cursor: pointer;
+
+}
+
+.text-left {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.text-right {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.text-container {
+  top: 200px;
+  position: absolute;
+}
+
+.text-bottom2 {
+  position: absolute;
+  left: 20px;
+  top: 350px;
+  width: 240px;
+  height: 32px;
+  display: flex;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(161, 161, 161, 1);
+}
+
+.checkbox {
+  position: absolute;
+  top: 348px;
+  right: 26px;
+}
+
+.text-button {
+  border-radius: 40px;
+  color: rgba(37, 37, 37, 1);
+  width: 150px;
+  height: 40px;
+  margin-top: 210px;
+  margin-left: 40px;
+  font-weight: bold;
 }
