@@ -1,16 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.181d5794.css",
-    "main.js": "./static/js/main.1595e53b.js",
+    "main.css": "./static/css/main.0e6b9fcf.css",
+    "main.js": "./static/js/main.49c05283.js",
     "static/js/787.468fb5a6.chunk.js": "./static/js/787.468fb5a6.chunk.js",
     "static/media/瀑布变“冰瀑”.png": "./static/media/瀑布变“冰瀑”.11ce25711680752ef2a2.png",
+    "static/media/pdf.svg": "./static/media/pdf.7b603996953d3651bf71641a7c2ca269.svg",
+    "static/media/image.svg": "./static/media/image.5f34e587e626602e0c8928cb6cfd60b8.svg",
+    "static/media/video.svg": "./static/media/video.709ca0140b56e3adf0a95679bc6a4059.svg",
     "index.html": "./index.html",
-    "main.181d5794.css.map": "./static/css/main.181d5794.css.map",
-    "main.1595e53b.js.map": "./static/js/main.1595e53b.js.map",
+    "main.0e6b9fcf.css.map": "./static/css/main.0e6b9fcf.css.map",
+    "main.49c05283.js.map": "./static/js/main.49c05283.js.map",
     "787.468fb5a6.chunk.js.map": "./static/js/787.468fb5a6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.181d5794.css",
-    "static/js/main.1595e53b.js"
+    "static/css/main.0e6b9fcf.css",
+    "static/js/main.49c05283.js"
   ]
 }
