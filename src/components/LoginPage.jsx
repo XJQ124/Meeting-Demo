@@ -8,7 +8,7 @@ import VideoIcon from '../pictures/video.svg'
 import ImageIcon from '../pictures/image.svg'
 import _ from "lodash";
 import { formatFileSize } from "../utills/computation";
-
+import { DemoLiquid } from "./Liquid";
 const options = [
     {
         label: '+86 中国大陆',
@@ -27,7 +27,6 @@ const options = [
         value: '+852',
     },
 ];
-
 function LoginPage() {
     const [phoneError, setPhoneError] = useState(false)
     const verification = () => {
@@ -60,48 +59,49 @@ function LoginPage() {
     const [showFileBox, setShowFileBox] = useState(false);
     // 左侧中间展示信息的状态
     const [showInfo, setShowInfo] = useState(true);
-
+    const [showBoxInside, setshowBoxInside] = useState(false);
     let notificationShow = [false]
     //上传事件
     const handleUploadChange = (info) => {
-        //获取已保存的文件
-        let savedFiles = [...selectedFiles];
-        //获取新增的文件列表，这里的fileList是Upload的属性
-        let newFiles = [...info.fileList];
-        // 检查是否有文件超过100MB
-        const OverLimit = newFiles.some(newFile => newFile.size > 100 * 1024 * 1024);
+        if (info.file === info.fileList[0]) {
+            //获取已保存的文件
+            let savedFiles = [...selectedFiles];
+            //获取新增的文件列表，这里的fileList是Upload的属性
+            let newFiles = [...info.fileList];
+            // 检查是否有文件超过100MB
+            const OverLimit = newFiles.some(newFile => newFile.size > 100 * 1024 * 1024);
 
-        if (OverLimit && notificationShow) {
-            // 文件违反上传规则，显示通知
-            notification.open({
-                description: `文件违反了上传规则，请重新上传`,
-                placement: 'bottomLeft',
-                style: {
-                    width: 370,
-                    fontWeight: "bold",
-                    backgroundColor: 'rgba(240, 197, 79, 1)',
-                },
-            });
-            notificationShow = true; 
-            return;
-        } else {
-            // 允许上传整个文件批次
-            newFiles.forEach(newFile => {
-                //去重
-                const isDuplicate = _.some(savedFiles, { 'name': newFile.name });
-                if (!isDuplicate) {
-                    savedFiles = _.concat(savedFiles, newFile);
-                }
-            });
+            if (OverLimit && notificationShow) {
+                // 文件违反上传规则，显示通知
+                notification.open({
+                    description: `文件违反了上传规则，请重新上传`,
+                    placement: 'bottomLeft',
+                    style: {
+                        width: 370,
+                        fontWeight: "bold",
+                        backgroundColor: 'rgba(240, 197, 79, 1)',
+                    },
+                });
+                notificationShow = true;
+                return;
+            } else {
+                // 允许上传整个文件批次
+                newFiles.forEach(newFile => {
+                    //去重
+                    const isDuplicate = _.some(savedFiles, { 'name': newFile.name });
+                    if (!isDuplicate) {
+                        savedFiles = _.concat(savedFiles, newFile);
+                    }
+                });
+            }
+            // 个数限制
+            if (savedFiles.length > 10) {
+                savedFiles = savedFiles.slice(-10)
+            }
+            setSelectedFiles(savedFiles);
+            setShowFileBox(true);
+            setShowInfo(false); // 文件选择后隐藏 rectangle
         }
-        // 个数限制
-        if (savedFiles.length > 10) {
-            savedFiles = savedFiles.slice(-10)
-        }
-        setSelectedFiles(savedFiles);
-        setShowFileBox(true);
-        setShowInfo(false); // 文件选择后隐藏 rectangle
-
     }
     //定义三个图片组件
     const Pdf = () => {
@@ -125,6 +125,7 @@ function LoginPage() {
             </div>
         )
     }
+    // 获取文件总大小
     const getTotalFileSize = () => {
         let totalSize = 0;
         selectedFiles.forEach(file => {
@@ -134,9 +135,7 @@ function LoginPage() {
         const totalSizeStr = formatFileSize(totalSize);
         return totalSizeStr;
     };
-
     const [isHovered, setIsHovered] = useState(null);
-
     const handleMouseEnter = (index) => {
         setIsHovered(index);
     };
@@ -158,7 +157,6 @@ function LoginPage() {
             // closeInfo.style.animationFillModel = "forwards";
         }
     };
-
     //通知提醒框
     const [api, contextHolder] = notification.useNotification();
     const openNotification = (placement) => {
@@ -172,10 +170,10 @@ function LoginPage() {
                 fontWeight: "bold",
                 backgroundColor: 'rgba(240, 197, 79, 1)',
             },
-            maxCount:1
+            maxCount: 1
         });
     };
-    //
+    //检验用户是否同意用户协议的状态
     const [isChecked, setIsChecked] = useState(true);
     return (
         <>
@@ -199,111 +197,123 @@ function LoginPage() {
                         </span>
                     )}
                 </Upload>
+                <div></div>
                 {showInfo && (
                     <span className="balck-square " >
                         <span className="text-square">
                             仅支持上传 PDF、图片、视频文件上传单个文件的大小不超过 100 MB同一批次上传文件数量不超过10个
                         </span>
                     </span>
-                    
                 )}
                 {/* 在这里根据需要展示文件列表 */}
                 {showFileBox && (
-                    <div className="file-box" >
-                        <div>
-                        </div>
-                        <span className="text-transfer">文件传输</span>
-                        <span className="total-size">共 {getTotalFileSize()} </span>
-                        <Upload
-                            //允许多个文件上传
-                            multiple={true}
-                            //隐藏默认文件显示样式
-                            fileList={[]}
-                            accept=".pdf,.jpg,.jpeg,.png,.gif,.mp4,.mov"
-                            onChange={handleUploadChange}
-                        >
-                            <span className="text-round">
-                                <span className="text-add">+</span>
-                            </span>
-                        </Upload>
-                        <div style={{ overflow: "auto", height: 140 }}>
-                            {/* 下面是每一列的内容 */}
-                            {_.map(selectedFiles, (file, index) => {
-                                const fileSize = formatFileSize(file.size);
-                                // 分割文件位置，获取文件的扩展名，并将其转换为小写字母形式。
-                                const fileExtension = file.name.split('.').pop().toLowerCase();
-                                let fileIcon;
-                                // 根据文件扩展名选择对应的 SVG 图标
-                                switch (fileExtension) {
-                                    case 'pdf':
-                                        fileIcon = <Pdf />;
-                                        break;
-                                    case 'jpg':
-                                    case 'jpeg':
-                                    case 'png':
-                                    case 'gif':
-                                        fileIcon = <Image />;
-                                        break;
-                                    case 'mp4':
-                                    case 'mov':
-                                        fileIcon = <Video />;
-                                        break;
-                                    default:
-                                        fileIcon = null;
-                                }
-                                return (
-                                    <>
-                                        <div key={index} className="file-item" onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave(index)}>
-                                            {fileIcon}
-                                            <div style={{ marginLeft: 10 }}>
-                                                <div className="file-name">{file.name}</div>
-                                                <div className="file-size"> {fileSize}</div>
-                                            </div>
-                                            {isHovered === index && (
-                                                <div className="close-x" onClick={() => handleDeleteFile(index)}>x</div>
-                                            )}
-                                        </div>
-                                    </>
-                                );
-                            })}
-                        </div>
-                        <div className="text-container">
+                    // 选择性显示file-box的效果
+                    <div className={`file-box ${showBoxInside ? 'uploading' : ''}`} >
+                        {!showBoxInside ? (
                             <div>
-                                <span className="text-left">有效期</span><span className="text-right" style={{ marginLeft: 194 }}>7天</span><br></br>
-                            </div>
-                            <div style={{ marginTop: 15 }}>
-                                <span className="text-left">上传文件格式限制</span><span className="text-right" style={{ marginLeft: 40 }}>PDF、图片、视频</span><br></br>
-                            </div>
-                            <div style={{ marginTop: 15 }}>
-                                <span className="text-left">单个文件容量限制</span><span className="text-right" style={{ marginLeft: 108 }}>100MB</span><br></br>
-                            </div>
-                            <div style={{ marginTop: 15 }}>
-                                <span className="text-left">单次上传数量限制</span><span className="text-right" style={{ marginLeft: 122 }}>10个</span><br></br>
-                            </div>
-                        </div>
+                                <span className="text-transfer">文件传输</span>
+                                <span className="total-size">共 {getTotalFileSize()} </span>
+                                <Upload
+                                    //允许多个文件上传
+                                    multiple={true}
+                                    //隐藏默认文件显示样式
+                                    fileList={[]}
+                                    accept=".pdf,.jpg,.jpeg,.png,.gif,.mp4,.mov"
+                                    onChange={handleUploadChange}
+                                >
+                                    <span className="text-round">
+                                        <span className="text-add">+</span>
+                                    </span>
+                                </Upload>
+                                <div style={{ overflow: "auto", height: 140 }}>
+                                    {/* 下面是每一列的内容 */}
+                                    {_.map(selectedFiles, (file, index) => {
+                                        const fileSize = formatFileSize(file.size);
+                                        // 分割文件位置，获取文件的扩展名，并将其转换为小写字母形式。
+                                        const fileExtension = file.name.split('.').pop().toLowerCase();
+                                        let fileIcon;
+                                        // 根据文件扩展名选择对应的 SVG 图标
+                                        switch (fileExtension) {
+                                            case 'pdf':
+                                                fileIcon = <Pdf />;
+                                                break;
+                                            case 'jpg':
+                                            case 'jpeg':
+                                            case 'png':
+                                            case 'gif':
+                                                fileIcon = <Image />;
+                                                break;
+                                            case 'mp4':
+                                            case 'mov':
+                                                fileIcon = <Video />;
+                                                break;
+                                            default:
+                                                fileIcon = null;
+                                        }
+                                        return (
+                                            <>
+                                                <div key={index} className="file-item" onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={() => handleMouseLeave(index)}>
+                                                    {fileIcon}
+                                                    <div style={{ marginLeft: 10 }}>
+                                                        <div className="file-name">{file.name}</div>
+                                                        <div className="file-size"> {fileSize}</div>
+                                                    </div>
+                                                    {isHovered === index && (
+                                                        <div className="close-x" onClick={() => handleDeleteFile(index)}>x</div>
+                                                    )}
+                                                </div>
+                                            </>
+                                        );
+                                    })}
+                                </div>
+                                <div className="text-container">
+                                    <div>
+                                        <span className="text-left">有效期</span><span className="text-right" style={{ marginLeft: 194 }}>7天</span><br></br>
+                                    </div>
+                                    <div style={{ marginTop: 15 }}>
+                                        <span className="text-left">上传文件格式限制</span><span className="text-right" style={{ marginLeft: 40 }}>PDF、图片、视频</span><br></br>
+                                    </div>
+                                    <div style={{ marginTop: 15 }}>
+                                        <span className="text-left">单个文件容量限制</span><span className="text-right" style={{ marginLeft: 108 }}>100MB</span><br></br>
+                                    </div>
+                                    <div style={{ marginTop: 15 }}>
+                                        <span className="text-left">单次上传数量限制</span><span className="text-right" style={{ marginLeft: 122 }}>10个</span><br></br>
+                                    </div>
+                                </div>
 
-                        <div className="text-bottom2">
-                            我已阅读且同意 用户协议 和 隐私政策 并对我分享的文件的合法合规性负责
-                        </div>
+                                <div className="text-bottom2">
+                                    我已阅读且同意 用户协议 和 隐私政策 并对我分享的文件的合法合规性负责
+                                </div>
+                                <Checkbox className="checkbox"
+                                    checked={isChecked}
+                                    //获取是否勾选的状态
+                                    onChange={(e) => setIsChecked(e.target.checked)}
+                                    //默认效果为选中
+                                    defaultChecked={true} />
+                                {contextHolder}
+                                <Button className="text-button" type="primary"
 
-                        <Checkbox className="checkbox"
-                            checked={isChecked}
-                            //获取是否勾选的状态
-                            onChange={(e) => setIsChecked(e.target.checked)}
-                            //默认效果为选中
-                            defaultChecked={true} />
-                        {contextHolder}
-                        <Button className="text-button" type="primary"
-                            // onClick={() => openNotification('bottomLeft')}
-                            onClick={() => {
-                                if (!isChecked) {
-                                    openNotification('bottomLeft');
-                                } else {
-                                    //开始上传文件
-                                }
-                            }}
-                        >开始上传</Button>
-
+                                    //这里会有一个判断，判断用户是否同意用户协议，是就上传文件，否提示用户同意文件要求
+                                    onClick={() => {
+                                        if (!isChecked) {
+                                            openNotification('bottomLeft');
+                                        } else {
+                                            //开始上传文件
+                                            setshowBoxInside(true); // 开始上传，隐藏内容
+                                        }
+                                    }}
+                                >开始上传</Button>
+                            </div>
+                        ) : (
+                            <>
+                                <div style={{ height: 150, width: 150, padding: '0px 54px',marginTop:-190}}>
+                                    <DemoLiquid />
+                                    <div>
+                                        已完成
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 )}
                 <span className="rectangle-right" style={{ zIndex: 99999 }}>
