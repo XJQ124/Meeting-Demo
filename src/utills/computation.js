@@ -1,5 +1,4 @@
 import _ from 'lodash';
-
 //判断文件类型
 export const formatFileSize = (size) => {
     if (size < 1024) {

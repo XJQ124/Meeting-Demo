@@ -1,0 +1,75 @@
+.transfer {
+    margin-top: -175px;
+    margin-left: 45px;
+    font-weight: bold;
+}
+
+.preview {
+    margin-top: 10px;
+    margin-left: 40px;
+    font-size: 12px;
+    color: rgba(161, 161, 161, 1);
+}
+
+
+.pin-style {
+    margin-left: -60px;
+    margin-top: 24px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.box {
+    margin-top: 10px;
+    margin-left: -50px;
+    top: 242px;
+    width: 250px;
+    height: 110px;
+    border-radius: 12px;
+    border: 1px solid rgba(225, 225, 225, 1);
+}
+
+.button-copy {
+    margin-left: -20px;
+    font-weight: bold;
+    margin-top: 30px;
+    display: flex;
+}
+
+.button-use {
+    border-radius: 40px;
+    margin-right: 10px;
+}
+
+.button-copy2 {
+    margin-left: 25px;
+    font-weight: bold;
+    margin-top: 30px;
+    display: flex;
+}
+
+.random {
+    margin-left: 75px;
+    margin-top: 30px;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.close-icon {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.text-preview {
+    font-size: 35px;
+    margin-left: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.text-information {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: bold;
+}

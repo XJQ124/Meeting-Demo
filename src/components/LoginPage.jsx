@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../LoginPage.css'
 import Change from '../pictures/change.png'
 import { Button, Divider, Drawer, Input, Select, ConfigProvider, Upload, Checkbox, notification } from 'antd';
 import { CloseOutlined, CaretDownOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import PdfIcon from '../pictures/pdf.svg'
-import VideoIcon from '../pictures/video.svg'
-import ImageIcon from '../pictures/image.svg'
+import { Pdf } from '../utills/icons'
+import { Image } from '../utills/icons'
+import { Video } from '../utills/icons'
 import _ from "lodash";
 import { formatFileSize } from "../utills/computation";
 import { DemoLiquid } from "./Liquid";
+import '../Liquid.css'
 const options = [
     {
         label: '+86 中国大陆',
@@ -60,6 +61,16 @@ function LoginPage() {
     // 左侧中间展示信息的状态
     const [showInfo, setShowInfo] = useState(true);
     const [showBoxInside, setshowBoxInside] = useState(false);
+    //选中了文件的个数
+    const [fileCount, setFileCount] = useState(0);
+    useEffect(()=>{
+        setFileCount(selectedFiles.length)
+    },[selectedFiles]);
+
+
+    // const savedfiles =()=>{
+    //     return selectedFiles.length;
+    // }
     let notificationShow = [false]
     //上传事件
     const handleUploadChange = (info) => {
@@ -102,28 +113,6 @@ function LoginPage() {
             setShowFileBox(true);
             setShowInfo(false); // 文件选择后隐藏 rectangle
         }
-    }
-    //定义三个图片组件
-    const Pdf = () => {
-        return (
-            <div>
-                <img src={PdfIcon} alt='Pdf图标' />
-            </div>
-        )
-    }
-    const Image = () => {
-        return (
-            <div>
-                <img src={ImageIcon} alt="照片" />
-            </div>
-        )
-    }
-    const Video = () => {
-        return (
-            <div>
-                <img src={VideoIcon} alt='Video图标' />
-            </div>
-        )
     }
     // 获取文件总大小
     const getTotalFileSize = () => {
@@ -307,10 +296,7 @@ function LoginPage() {
                         ) : (
                             <>
                                 <div style={{ height: 150, width: 150, padding: '0px 54px',marginTop:-190}}>
-                                    <DemoLiquid />
-                                    <div>
-                                        已完成
-                                    </div>
+                                        <DemoLiquid fileCount={fileCount} getTotalFileSize={getTotalFileSize}/>
                                 </div>
                             </>
                         )}
