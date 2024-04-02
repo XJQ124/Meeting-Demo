@@ -364,7 +364,7 @@ function LoginPage() {
                     </div>
                 </Drawer>
                 <span className="text-bottom">
-                    版权投诉 ｜服务协议 ｜ 上海金桥信息股份有限公司 ｜ 沪ICP备2022103850号-1 ｜ 互联网安全备案号35020602002560｜V1.3
+                    版权投诉 ｜服务协议 ｜ XXXX有限公司 ｜ 沪ICP备2XXXXXX号-1 ｜ 互联网安全备案号3XXXXXX｜V1.3
                 </span>
             </div>
         </>
